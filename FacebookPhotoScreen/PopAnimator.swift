@@ -55,8 +55,8 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     containerView.bringSubview(toFront: herbView)
 
     UIView.animate(withDuration: duration, delay:0.0,
-      usingSpringWithDamping: 0.95,
-      initialSpringVelocity: 0.0,
+      usingSpringWithDamping: 0.8,
+      initialSpringVelocity: 0.5,
       options: [],
       animations: {
         if self.presenting {

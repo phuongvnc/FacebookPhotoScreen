@@ -14,7 +14,6 @@
 		51D37B861E9DC6D1009AF0B5 /* PhotoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51D37B7C1E9DC6D1009AF0B5 /* PhotoDetailViewController.xib */; };
 		51D37B871E9DC6D1009AF0B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51D37B7D1E9DC6D1009AF0B5 /* Assets.xcassets */; };
 		51D37B881E9DC6D1009AF0B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51D37B7E1E9DC6D1009AF0B5 /* LaunchScreen.storyboard */; };
-		51D37B891E9DC6D1009AF0B5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51D37B7F1E9DC6D1009AF0B5 /* Info.plist */; };
 		51D37B8A1E9DC6D1009AF0B5 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D37B801E9DC6D1009AF0B5 /* ImageCell.swift */; };
 		51D37B8B1E9DC6D1009AF0B5 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D37B811E9DC6D1009AF0B5 /* PopAnimator.swift */; };
 /* End PBXBuildFile section */
@@ -141,7 +140,6 @@
 				51D37B861E9DC6D1009AF0B5 /* PhotoDetailViewController.xib in Resources */,
 				51D37B881E9DC6D1009AF0B5 /* LaunchScreen.storyboard in Resources */,
 				51D37B871E9DC6D1009AF0B5 /* Assets.xcassets in Resources */,
-				51D37B891E9DC6D1009AF0B5 /* Info.plist in Resources */,
 				51D37B841E9DC6D1009AF0B5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +301,7 @@
 				51D37B771E9DC6B6009AF0B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

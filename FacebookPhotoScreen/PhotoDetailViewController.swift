@@ -65,11 +65,9 @@ class PhotoDetailViewController: UIViewController {
     }
 
     func setUpUI() {
-
         scrollView.minimumZoomScale = 1
         scrollView.maximumZoomScale = 6
         scrollView.delegate = self
-
         scrollView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(actionPanImageView(pan:))))
     }
 
@@ -94,13 +92,12 @@ class PhotoDetailViewController: UIViewController {
             break
         case .changed:
             let updatePoint = pan.location(in: self.view)
-            let dy = updatePoint.y > startPoint.y ? updatePoint.y - startPoint.y : startPoint.y - updatePoint.y 
-            let dx = updatePoint.x > startPoint.x ? updatePoint.x - startPoint.x : startPoint.x - updatePoint.x
+            let dy = abs(startPoint.y - updatePoint.y)
+            let dx = abs(startPoint.x - updatePoint.x)
             var scale = updatePoint.y > startPoint.y ? startPoint.y/updatePoint.y : updatePoint.y/startPoint.y
             scale = scale > 0.6 ? scale : 0.6
             let y = updatePoint.y > startPoint.y ? center.y + dy : center.y - dy
             let x = updatePoint.x > startPoint.x ? center.x + dx : center.x - dx
-
             panImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
             panImageView.center = CGPoint(x: x, y: y)
             bgView.alpha = scale
