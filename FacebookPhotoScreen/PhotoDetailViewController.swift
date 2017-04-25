@@ -19,20 +19,7 @@ class PhotoDetailViewController: UIViewController {
     @IBOutlet fileprivate weak var actionView: UIView!
 
     var image: UIImage?
-
-    lazy var panImageView: UIImageView = {
-        guard let image = self.image else {
-            return UIImageView()
-        }
-        let imageView = UIImageView(image: self.image)
-        let width = self.view.bounds.width
-        let height = (image.size.height * width) / image.size.width
-        imageView.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        imageView.contentMode = UIViewContentMode.scaleToFill
-        imageView.tag = 100 //Add tag for image view. When controller dismissed then controller transition will get image view by tag and show animation
-        imageView.clipsToBounds = true
-        return imageView
-    }()
+    var panImageView: UIImageView!
 
     var isAction: Bool = false {
         didSet {
@@ -62,6 +49,7 @@ class PhotoDetailViewController: UIViewController {
         super.viewDidLoad()
         setUpData()
         setUpUI()
+        initPanImageView()
     }
 
     func setUpUI() {
@@ -69,6 +57,20 @@ class PhotoDetailViewController: UIViewController {
         scrollView.maximumZoomScale = 6
         scrollView.delegate = self
         scrollView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(actionPanImageView(pan:))))
+    }
+
+    func initPanImageView() {
+        panImageView = UIImageView(image: self.image)
+        guard let image = image else {
+            return
+        }
+
+        let width =   view.bounds.width
+        let height = (image.size.height * width) / image.size.width
+        panImageView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        panImageView.contentMode = UIViewContentMode.scaleAspectFill
+        panImageView.tag = 100 //Add tag for image view. When controller dismissed then controller transition will get image view by tag and show animation
+        panImageView.clipsToBounds = true
     }
 
      override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +93,7 @@ class PhotoDetailViewController: UIViewController {
             view.addSubview(panImageView)
             break
         case .changed:
-            let updatePoint = pan.location(in: self.view)
+            let updatePoint = pan.location(in: view)
             let dy = abs(startPoint.y - updatePoint.y)
             let dx = abs(startPoint.x - updatePoint.x)
             var scale = updatePoint.y > startPoint.y ? startPoint.y/updatePoint.y : updatePoint.y/startPoint.y
@@ -107,7 +109,7 @@ class PhotoDetailViewController: UIViewController {
             let distanceY = updatePoint.y > startPoint.y ? updatePoint.y - startPoint.y : startPoint.y - updatePoint.y
             if distanceY > 70 {
                 bgView.alpha = 0
-                panImageView.contentMode = .scaleAspectFit
+                panImageView.contentMode = .scaleAspectFill
                 dismiss(animated: true, completion: nil)
             } else {
                 UIView.animate(withDuration: 0.5, animations: {
@@ -127,6 +129,12 @@ class PhotoDetailViewController: UIViewController {
     }
 
     @IBAction func close(sender: UIButton) {
+        if panImageView.superview == nil{
+            panImageView.center = view.center
+            view.addSubview(panImageView)
+            scrollView.isHidden = true
+            bgView.alpha = 0
+        }
         dismiss(animated: true, completion: nil)
     }
 

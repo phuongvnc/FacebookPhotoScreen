@@ -25,7 +25,7 @@ class ImageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         imageView = UIImageView(frame: frame)
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         addSubview(imageView)
         imageView.clipsToBounds = true
     }

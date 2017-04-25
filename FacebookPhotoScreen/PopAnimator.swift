@@ -60,13 +60,10 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
       options: [],
       animations: {
         if self.presenting {
-            herbView.transform = self.presenting ?
-                CGAffineTransform(scaleX: 1, y: 1) : scaleTransform
+            herbView.transform = self.presenting ? CGAffineTransform(scaleX: 1, y: 1) : scaleTransform
         } else {
             herbView.frame = finalFrame
         }
-
-
         herbView.center = CGPoint(x: finalFrame.midX,y: finalFrame.midY)
 
       }, completion:{_ in
